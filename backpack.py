@@ -10,20 +10,21 @@ class Backpack:
     ToDo: [X] Sort Items
     """
 
-    def __init__(self, items):
+    def __init__(self):
         self._backpack = []
         items = []
-        if type(items) != "<class 'list'>":
+        if type(items) is not "<class 'list'>":
             items = []
         for item in items:
             self._backpack.append(item)
         self.sort()
 
     def __str__(self):
-        if type(self._backpack) is []:
-            message = "here's your backpack"
+        """Prints backpack creation status."""
+        if type(self._backpack) is list:
+            message = "Backpack was created successfully."
         else:
-            message = "backpack not created"
+            message = "Backpack not created."
         return message
 
     def sort(self):
@@ -33,7 +34,8 @@ class Backpack:
         return self._backpack.count()
 
     def list(self):
-        pass
+        for item in self._backpack:
+            print(item)
 
     def add(self, item):
         if item is not None:

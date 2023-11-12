@@ -10,6 +10,7 @@ class Player:
         if backpack is None:
             self.backpack = self.create_backpack()
 
+
     @staticmethod
     def set_name():
         """Sets the player's name."""
