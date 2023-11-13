@@ -14,6 +14,8 @@ class Location:
         return f'{self.name}'
 
     def get_available_exits(self):
+        """Gets all available exits of a given location as a list (N, S, W, and/or E)."""
+
         exits = []
 
         if self.north_exit is True:

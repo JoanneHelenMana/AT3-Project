@@ -25,9 +25,14 @@ def play():
     # while... do...
     current_location = player.location
     dracula_jr.welcome_player(player.name)
+    player.backpack.add("flower")
     available_exits = player.location.get_available_exits()
     response = dracula_jr.get_player_response(available_exits)
-    dracula_jr.check_player_response(response, current_location, available_exits)
+    if response == "I":
+        player.backpack.show_inventory()
+        response = dracula_jr.get_player_response(available_exits)
+    else:
+        dracula_jr.check_player_response(response, current_location, available_exits)
 
 
 if __name__ == "__main__":

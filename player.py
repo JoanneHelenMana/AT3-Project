@@ -13,18 +13,21 @@ class Player:
         if backpack is None:
             self.backpack = self.create_backpack()
 
-
     @staticmethod
     def set_name():
         """Sets the player's name."""
+
         name = input(f"What's your name, player?\n")
         return name
 
     @staticmethod
     def create_backpack():
         """Creates the player's backpack."""
+
         backpack = Backpack()
         return backpack
 
     def set_location(self, location=Location):
+        """Sets player's current location."""
+
         self.location = location

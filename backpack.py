@@ -13,7 +13,7 @@ class Backpack:
     def __init__(self):
         self._backpack = []
         items = []
-        if type(items) is not "<class 'list'>":
+        if type(items) != "<class 'list'>":
             items = []
         for item in items:
             self._backpack.append(item)
@@ -28,16 +28,19 @@ class Backpack:
         return message
 
     def sort(self):
+        """Sorts items in backpack."""
         self._backpack.sort()
 
     def count(self):
         return self._backpack.count()
 
-    def list(self):
+    def show_inventory(self):
+        """Prints backpack's inventory."""
         for item in self._backpack:
             print(item)
 
     def add(self, item):
+        """Adds items to the backpack."""
         if item is not None:
             self._backpack.append(item)
             self.sort()
