@@ -1,9 +1,12 @@
 from backpack import Backpack
+from location import Location
 
 
 class Player:
 
-    def __init__(self, name=None, backpack=None):
+    def __init__(self, name=None, backpack=None, location=Location):
+        self.location = location
+
         if name is None:
             self.name = self.set_name()
 
@@ -22,3 +25,6 @@ class Player:
         """Creates the player's backpack."""
         backpack = Backpack()
         return backpack
+
+    def set_location(self, location=Location):
+        self.location = location
