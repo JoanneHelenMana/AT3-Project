@@ -1,5 +1,6 @@
 from location import Location
 from backpack import Backpack
+from player import Player
 
 
 class Character:
@@ -18,13 +19,13 @@ class Character:
     @staticmethod
     def get_player_response(exits):
         """Presents to the player the question 'What do you want to do?' and displays available exists.
-
         Returns the player's response."""
+
         response = input(f"What do you want to do? Exits: {exits}\n")
         return response
 
     def check_player_response(self, response, player_location, exits):
-        """"""
-        # I for inventory returns items in backpack
-        if response in exits:
-            pass
+        """ """
+
+        for char in exits:
+            return response

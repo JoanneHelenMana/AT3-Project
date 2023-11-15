@@ -32,7 +32,7 @@ class Backpack:
         self._backpack.sort()
 
     def count(self):
-        return self._backpack.count()
+        return self._backpack.count(self)
 
     def show_inventory(self):
         """Prints backpack's inventory."""
