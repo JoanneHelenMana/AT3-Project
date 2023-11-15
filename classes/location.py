@@ -1,11 +1,12 @@
 class Location:
 
-    def __init__(self, name, north_exit, south_exit, west_exit, east_exit, description, north_leads_to=None,
-                 south_leads_to=None, west_leads_to=None, east_leads_to=None, visited=False, starting_point=False,
-                 ending_point=False):
+    def __init__(self, name, north_exit, south_exit, west_exit, east_exit, description, map_position,
+                 north_leads_to=None, south_leads_to=None, west_leads_to=None, east_leads_to=None, visited=False,
+                 starting_point=False, ending_point=False):
 
         self.name = name
         self.description = description
+        self.map_position = map_position
         self.north_exit = north_exit
         self.south_exit = south_exit
         self.west_exit = west_exit
@@ -25,7 +26,6 @@ class Location:
         """Gets all available exits of a given location as a list (N, S, W, and/or E)."""
 
         exits = []
-
         if self.north_exit is True:
             exits.append("N")
         if self.south_exit is True:
@@ -34,8 +34,16 @@ class Location:
             exits.append("W")
         if self.east_exit is True:
             exits.append("E")
-
         return exits
 
     def get_north_leads_to(self):
         return self.north_leads_to
+
+    def get_south_leads_to(self):
+        return self.south_leads_to
+
+    def get_east_leads_to(self):
+        return self.east_leads_to
+
+    def get_west_leads_to(self):
+        return self.west_leads_to

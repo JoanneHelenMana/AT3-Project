@@ -36,6 +36,7 @@ class Backpack:
 
     def show_inventory(self):
         """Prints backpack's inventory."""
+        print('Inventory: ')
         for item in self._backpack:
             print(item)
 

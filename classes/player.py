@@ -1,5 +1,5 @@
-from backpack import Backpack
-from location import Location
+from classes.backpack import Backpack
+from classes.location import Location
 
 
 class Player:
@@ -29,5 +29,9 @@ class Player:
 
     def set_location(self, location=Location):
         """Sets player's current location."""
-
         self.location = location
+        return self.location
+
+    def get_location(self):
+        """Gets player location."""
+        return self.location
