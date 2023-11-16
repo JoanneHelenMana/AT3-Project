@@ -9,7 +9,6 @@ class Backpack:
     ToDo: [ ] in backpack (Search for Item - Student to do)
     ToDo: [X] Sort Items
     """
-
     def __init__(self):
         self._backpack = []
         items = []
@@ -32,13 +31,16 @@ class Backpack:
         self._backpack.sort()
 
     def count(self):
+        """."""
         return self._backpack.count(self)
 
     def show_inventory(self):
         """Prints backpack's inventory."""
         print('Inventory: ')
+        item_str = ""
         for item in self._backpack:
-            print(item)
+            item_str = ', '.join(self._backpack)
+        print(item_str)
 
     def add(self, item):
         """Adds items to the backpack."""

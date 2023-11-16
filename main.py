@@ -1,3 +1,5 @@
+import string
+
 from classes.player import Player
 from classes.location import Location
 from classes.character import Character
@@ -21,7 +23,8 @@ def play():
     lounge = Location("lounge", True, True, False, True, "",
                       map_position="1,1", north_leads_to='guest bedroom', south_leads_to='hall', east_leads_to='garden')
     guest_bedroom = Location("guest bedroom", False, True, True, False,
-                             map_position="0,1", south_leads_to='lounge', west_leads_to='master bedroom', description="")
+                             map_position="0,1", south_leads_to='lounge', west_leads_to='master bedroom',
+                             description="")
     master_bedroom = Location("master bedroom", False, False, False, True,
                               map_position="0,0", east_leads_to='guest bedroom', description="")
     bathroom = Location("bathroom", False, False, False, True, "",
@@ -31,21 +34,26 @@ def play():
     if garden.starting_point is True:
         player.set_location(garden)
 
-    # Game main logic.
+    # Game main logic starts.
     dracula_jr.welcome_player(player.name)
+    player.backpack.add("vase")
     player.backpack.add("flower")
-    available_exits = player.location.get_available_exits()
 
     while True:
-        response = dracula_jr.get_player_response(available_exits)
-        if response == "I":
-            player.backpack.show_inventory()
-        else:
-            break
+        while True:
+            available_exits = player.location.get_available_exits()
+            response = dracula_jr.get_player_response(available_exits)
+            if response == "I":     # I = inventory
+                player.backpack.show_inventory()
+            else:
+                break
 
-    current_location = player.get_location()
-    dracula_jr.check_player_response(player, available_exits, response)
-    current_location = player.get_location()
+        while True:
+            checked_response = dracula_jr.check_player_response(player, available_exits, response)
+            if checked_response is not string.ascii_letters:
+                dracula_jr.wrong_input(player.name)
+            else:
+                dracula_jr.inspect_item()
 
 
 if __name__ == "__main__":

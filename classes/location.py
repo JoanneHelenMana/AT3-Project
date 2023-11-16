@@ -1,5 +1,5 @@
 class Location:
-
+    """."""
     def __init__(self, name, north_exit, south_exit, west_exit, east_exit, description, map_position,
                  north_leads_to=None, south_leads_to=None, west_leads_to=None, east_leads_to=None, visited=False,
                  starting_point=False, ending_point=False):
@@ -24,7 +24,6 @@ class Location:
 
     def get_available_exits(self):
         """Gets all available exits of a given location as a list (N, S, W, and/or E)."""
-
         exits = []
         if self.north_exit is True:
             exits.append("N")
@@ -37,13 +36,25 @@ class Location:
         return exits
 
     def get_north_leads_to(self):
+        """Gets and returns the location to which the N exit leads."""
         return self.north_leads_to
 
     def get_south_leads_to(self):
+        """Gets and returns the location to which the S exit leads."""
         return self.south_leads_to
 
     def get_east_leads_to(self):
+        """Gets and returns the location to which the E exit leads."""
         return self.east_leads_to
 
     def get_west_leads_to(self):
+        """Gets and returns the location to which the W exit leads."""
         return self.west_leads_to
+
+    def was_visited(self):
+        """Marks location as visited (True). Returns whether visited status was changed."""
+        if self.visited is False:
+            self.visited = True
+            return 'changed'
+        else:
+            return 'not changed'

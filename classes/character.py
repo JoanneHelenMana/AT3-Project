@@ -1,14 +1,15 @@
 from location import Location
+from item import Item
 
 
 class Character:
+    """."""
     def __init__(self, name):
         self.name = name
 
     @staticmethod
     def welcome_player(player_name):
         """Welcomes the player at the beginning of the game. Describes instructions, help and allowed input."""
-
         print(f"Welcome, {player_name}")
         # expand welcome message
         # I for inventory
@@ -27,24 +28,31 @@ class Character:
 
     def check_player_response(self, player, exits, response):
         """."""
-        if len(response) is 1:  # one character: N, S, W, or E
+        response.upper()
+        if response == 'N':
+            location = player.location.get_north_leads_to()
 
-            if response.upper() == 'N':
-                location = player.location.get_north_leads_to()
+        elif response == 'S':
+            location = player.location.get_south_leads_to()
 
-            elif response.upper() == 'S':
-                location = player.location.get_south_leads_to()
+        elif response == 'E':
+            location = player.location.get_east_leads_to()
 
-            elif response.upper() == 'E':
-                location = player.location.get_east_leads_to()
+        elif response == 'W':
+            location = player.location.get_west_leads_to()
 
-            elif response.upper() == 'W':
-                location = player.location.get_west_leads_to()
+        else:
+            response.lower()
 
+        if location is not None:
             player.set_location(location)
 
-        if len(response) > 1:
-            pass
-        # if valid sentence
+        return response
 
-        # else: prompt message
+    def inspect_item(self):
+        """."""
+        pass
+
+    @staticmethod
+    def wrong_input(player_name):
+        print(f'Wrong input. Try again, {player_name}')

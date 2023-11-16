@@ -1,3 +1,6 @@
+import os
+
+
 class Map:
     """."""
     def __init__(self):
@@ -8,15 +11,15 @@ class Map:
 
     def create_file(self):
         """Creates the map file."""
+        if os.path.exists(self.file_name):
+            os.remove(self.file_name)
         try:
             open(self.file_name, "x")
         except FileExistsError:
             pass
 
     def create_map(self):
-        """
-        Creates the initial map array and saves it to file.
-        """
+        """Creates the initial map array and saves it to file."""
         rows, cols = (3, 3)
         self._map_array = [['_' for i in range(cols)] for j in range(rows)]     # updates array variable
         # print(f'array: {self._map_array}')
@@ -50,7 +53,6 @@ class Map:
         'X' = visited
         ' ' = room is not accessible
         """
-
         # arr[0][0] = 1
         for row in self._map_array:
             for element in row:
@@ -58,4 +60,5 @@ class Map:
             print()
 
     def update_map(self, row, column):
+        """."""
         pass
