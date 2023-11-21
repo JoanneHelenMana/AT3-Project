@@ -4,8 +4,9 @@ from classes.location import Location
 
 class Player:
     """."""
-    def __init__(self, name=None, backpack=None, location=Location):
+    def __init__(self, location, name=None, backpack=None):
         self.location = location
+        self.set_initial_location(self.location)
 
         if name is None:
             self.name = self.set_name()
@@ -29,6 +30,9 @@ class Player:
         """Sets the current location of the player."""
         self.location = location
         return self.location
+
+    def set_initial_location(self, location):
+        self.location = location
 
     def get_location(self):
         """Returns player location."""

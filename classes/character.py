@@ -1,11 +1,12 @@
 from location import Location
-from item import Item
+from player import Player
 
 
 class Character:
     """."""
-    def __init__(self, name):
+    def __init__(self, name, player=Player):
         self.name = name
+        self.player = player
 
     @staticmethod
     def welcome_player(player_name):
@@ -24,35 +25,38 @@ class Character:
             exits_str = ', '.join(exits)
 
         response = input(f"What do you want to do? Exits: {exits_str}\n")
+        response.upper()
+
         return response
 
-    def check_player_response(self, player, exits, response):
+    def check_player_response(self, response):
         """."""
-        response.upper()
-        if response == 'N':
-            location = player.location.get_north_leads_to()
+        location = None
 
-        elif response == 'S':
-            location = player.location.get_south_leads_to()
+        if response.upper() == 'N':
+            location = self.player.location.get_north_leads_to()
+            print('location changed to N leads to')
 
-        elif response == 'E':
-            location = player.location.get_east_leads_to()
+        elif response.upper() == 'S':
+            location = self.player.location.get_south_leads_to()
 
-        elif response == 'W':
-            location = player.location.get_west_leads_to()
+        elif response.upper() == 'E':
+            location = self.player.location.get_east_leads_to()
+
+        elif response.upper() == 'W':
+            location = self.player.location.get_west_leads_to()
 
         else:
             response.lower()
 
         if location is not None:
-            player.set_location(location)
+            self.player.set_location(location)
 
         return response
 
     def inspect_item(self):
         """."""
-        pass
+        print('item inspected')
 
-    @staticmethod
-    def wrong_input(player_name):
-        print(f'Wrong input. Try again, {player_name}')
+    def wrong_input(self):
+        print(f'Wrong input. Try again, {self.player.name}')
