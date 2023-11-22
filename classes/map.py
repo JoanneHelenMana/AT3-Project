@@ -3,11 +3,12 @@ import os
 
 class Map:
     """."""
-    def __init__(self):
+    def __init__(self, inaccessible_locations):
+        self.inaccessible_locations = inaccessible_locations
         self._map_array = []
         self.file_name = "map.txt"
         self.create_file()
-        self.create_map()
+        self.create_map(inaccessible_locations)
 
     def create_file(self):
         """Creates the map file."""
@@ -18,12 +19,18 @@ class Map:
         except FileExistsError:
             pass
 
-    def create_map(self):
+    def create_map(self, inaccessible_locations):
         """Creates the initial map array and saves it to file."""
         rows, cols = (3, 3)
         self._map_array = [['_' for i in range(cols)] for j in range(rows)]     # updates array variable
+
+        room_not_accessible = ' '
+        for coordenate in inaccessible_locations:
+            index = coordenate.split(',', 2)
+            self._map_array[int(index[0])][int(index[1])] = room_not_accessible
         # print(f'array: {self._map_array}')
         self.update_file()  # updates text file
+        self.print_map()    # to be removed
 
     def update_file(self):
         """Updates map text file (map.txt)."""
@@ -61,4 +68,4 @@ class Map:
 
     def update_map(self, row, column):
         """."""
-        pass
+        visited = 'X'

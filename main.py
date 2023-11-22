@@ -7,7 +7,7 @@ from classes.map import Map
 
 def play():
     """Interaction logic of the game."""
-    # Instantiate locations.
+    # Instantiate locations. Max = 9
     hall = Location("hall", True, None, True, False, "You have reached the hall.",
                     map_position="2,1", ending_point=True, north_leads_to='lounge', west_leads_to='bathroom')
     garden = Location("garden", True, False, True, False, "",
@@ -23,6 +23,7 @@ def play():
                               map_position="0,0", east_leads_to='guest bedroom', description="")
     bathroom = Location("bathroom", False, False, False, True, "",
                         map_position="2,0", east_leads_to='hall')
+    inaccessible_map_positions = ["1,0", "2,2"]
 
     # Initiate player, character, and map.
     starting_point = ''
@@ -30,7 +31,7 @@ def play():
         starting_point = garden
     player = Player(starting_point)
     dracula_jr = Character("Dracula Jr.", player=player)
-    castle_map = Map()
+    castle_map = Map(inaccessible_map_positions)
 
     # Instantiate items.
 
