@@ -58,3 +58,7 @@ class Location:
             return 'changed'
         else:
             return 'not changed'
+
+    def get_description(self):
+        """."""
+        return self.description

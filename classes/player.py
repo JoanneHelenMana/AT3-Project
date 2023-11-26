@@ -26,7 +26,7 @@ class Player:
         backpack = Backpack()
         return backpack
 
-    def set_location(self, location=Location):
+    def set_location(self, location):
         """Sets the current location of the player."""
         self.location = location
         return self.location
@@ -37,3 +37,7 @@ class Player:
     def get_location(self):
         """Returns player location."""
         return self.location
+
+    def print_description(self):
+        """Prints location description to console."""
+        print(self.location.get_description())

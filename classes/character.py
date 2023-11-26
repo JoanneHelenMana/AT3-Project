@@ -1,17 +1,19 @@
 from location import Location
 from player import Player
+import string
+
+
 
 
 class Character:
-    """."""
-    def __init__(self, name, player=Player):
+    """Acts as interface."""
+    def __init__(self, name, player):
         self.name = name
         self.player = player
 
-    @staticmethod
-    def welcome_player(player_name):
+    def welcome_player(self):
         """Welcomes the player at the beginning of the game. Describes instructions, help and allowed input."""
-        print(f"Welcome, {player_name}")
+        print(f"Welcome, {self.player.name}")
         # expand welcome message
         # I for inventory
         # thorough instruction
@@ -25,17 +27,46 @@ class Character:
             exits_str = ', '.join(exits)
 
         response = input(f"What do you want to do? Exits: {exits_str}\n")
-        response.upper()
 
         return response
 
     def check_player_response(self, response):
         """."""
-        location = None
 
+        def check_letters(value):
+            for letter in value:
+                if letter not in string.ascii_letters:
+                    return False
+            return True
+
+        location = ""
+        command = ""
+
+        if check_letters(response) is False:
+            return False
+
+        elif len(response.upper()) == 1:
+            if response.upper() == 'N':
+                location = self.player.location.get_north_leads_to()
+
+            elif response.upper() == 'S':
+                location = self.player.location.get_south_leads_to()
+
+            elif response.upper() == 'E':
+                location = self.player.location.get_east_leads_to()
+
+            elif response.upper() == 'W':
+                location = self.player.location.get_west_leads_to()
+            return 'is location'
+
+        elif len(response) > 1:
+            command = response
+            return 'is command'
+
+    def get_next_room(self, response):
+        """."""
         if response.upper() == 'N':
             location = self.player.location.get_north_leads_to()
-            print('location changed to N leads to')
 
         elif response.upper() == 'S':
             location = self.player.location.get_south_leads_to()
@@ -46,13 +77,7 @@ class Character:
         elif response.upper() == 'W':
             location = self.player.location.get_west_leads_to()
 
-        else:
-            response.lower()
-
-        if location is not None:
-            self.player.set_location(location)
-
-        return response
+        return location
 
     def inspect_item(self):
         """."""

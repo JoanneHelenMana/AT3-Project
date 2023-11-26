@@ -2,7 +2,10 @@ import os
 
 
 class Map:
-    """."""
+    """.
+        '_' = not visited
+        'X' = visited
+        ' ' = room is not accessible"""
     def __init__(self, inaccessible_locations):
         self.inaccessible_locations = inaccessible_locations
         self._map_array = []
@@ -24,12 +27,14 @@ class Map:
         rows, cols = (3, 3)
         self._map_array = [['_' for i in range(cols)] for j in range(rows)]     # updates array variable
 
-        room_not_accessible = ' '
-        for coordenate in inaccessible_locations:
-            index = coordenate.split(',', 2)
-            self._map_array[int(index[0])][int(index[1])] = room_not_accessible
+        if inaccessible_locations is not None:
+
+            room_not_accessible = ' '
+            for coordenate in inaccessible_locations:
+                index = coordenate.split(',', 2)
+                self._map_array[int(index[0])][int(index[1])] = room_not_accessible
         # print(f'array: {self._map_array}')
-        self.update_file()  # updates text file
+        self.update_file()
         self.print_map()    # to be removed
 
     def update_file(self):
@@ -56,9 +61,7 @@ class Map:
         """
         Prints the castle map.
 
-        '_' = not visited
-        'X' = visited
-        ' ' = room is not accessible
+
         """
         # arr[0][0] = 1
         for row in self._map_array:
