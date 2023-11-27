@@ -28,22 +28,21 @@ class Character:
 
         return response
 
+    @staticmethod
+    def check_letters(value):
+        for letter in value:
+            if letter not in string.ascii_letters:
+                if letter not in string.whitespace:
+                    return False
+        return True
+
     def check_player_response(self, response):
         """."""
-
-        def check_letters(value):
-            for letter in value:
-                if letter not in string.ascii_letters:
-                    return False
-            return True
-
         location = ""
-        command = ""
+        response = response.strip()
 
-        if check_letters(response) is False:
-            return False
-
-        elif len(response.upper()) == 1:
+        if len(response) == 1:
+            # Response is a direction(exit)
             if response.upper() == 'N':
                 location = self.player.location.get_north_leads_to()
 
@@ -55,11 +54,16 @@ class Character:
 
             elif response.upper() == 'W':
                 location = self.player.location.get_west_leads_to()
+
             return 'is location'
 
         elif len(response) > 1:
-            command = response
-            return 'is command'
+            if self.check_letters(response) is False:
+                # Bad input
+                return False
+
+            elif self.check_letters(response) is True:
+                return 'is command'
 
     def get_next_room(self, response):
         """."""

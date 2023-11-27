@@ -1,7 +1,6 @@
 from classes.player import Player
 from classes.location import Location
 from classes.character import Character
-from classes.map import Map
 from classes.item import Item
 import time
 
@@ -85,8 +84,9 @@ def play():
                 dracula_jr.inspect_item()
 
         # win or lose game
-        play_again = input('Would you like yo play again?')
+        play_again = input('Would you like to play again?')
         if play_again == 'yes':
+            print('OK, here we go again.')
             continue
         else:
             print(f'No worries, {player.name}. See you next time.')
