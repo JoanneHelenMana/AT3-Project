@@ -50,11 +50,9 @@ class Backpack:
             self.sort()
 
     def in_backpack(self, item):
-        """
-        Complete this method using a binary search
+        """Complete this method using a binary search
         returns -1 or False if not found
         returns position if found
         :param item:
-        :return: -1 | False | integer
-        """
+        :return: -1 | False | integer"""
         return None

@@ -2,7 +2,7 @@ class Location:
     """."""
     def __init__(self, name, north_exit, south_exit, west_exit, east_exit, description, map_position,
                  north_leads_to=None, south_leads_to=None, west_leads_to=None, east_leads_to=None, visited=False,
-                 starting_point=False, ending_point=False):
+                 starting_point=False, ending_point=False, item=None):
 
         self.name = name
         self.description = description
@@ -18,6 +18,7 @@ class Location:
         self.east_leads_to = east_leads_to
         self.starting_point = starting_point
         self.ending_point = ending_point
+        self.item = item
 
     def __str__(self):
         return f'{self.name}'

@@ -2,16 +2,20 @@ import os
 
 
 class Map:
-    """.
-        '_' = not visited
-        'X' = visited
-        ' ' = room is not accessible"""
-    def __init__(self, inaccessible_locations):
-        self.inaccessible_locations = inaccessible_locations
+    """
+    A 3x3 map.
+
+    '_' = not visited
+    'X' = visited
+    ' ' = room is not accessible
+    """
+
+    def __init__(self):
+        inaccessible_map_positions = ["1,0", "2,2"]
         self._map_array = []
         self.file_name = "map.txt"
         self.create_file()
-        self.create_map(inaccessible_locations)
+        self.create_map(inaccessible_map_positions)
 
     def create_file(self):
         """Creates the map file."""
@@ -28,14 +32,12 @@ class Map:
         self._map_array = [['_' for i in range(cols)] for j in range(rows)]     # updates array variable
 
         if inaccessible_locations is not None:
-
             room_not_accessible = ' '
             for coordenate in inaccessible_locations:
                 index = coordenate.split(',', 2)
                 self._map_array[int(index[0])][int(index[1])] = room_not_accessible
-        # print(f'array: {self._map_array}')
+
         self.update_file()
-        self.print_map()    # to be removed
 
     def update_file(self):
         """Updates map text file (map.txt)."""
@@ -46,29 +48,24 @@ class Map:
             flat_map.append('\n')
 
         map_string = "".join(flat_map)
-        # print(f'map string:\n{map_string}')
 
         with open(self.file_name, 'w+') as file:
             file.writelines(map_string.rstrip('\n'))
 
         with open(self.file_name, 'r') as file:
-            # print('file:')
             lines = file.readlines()
-            #for line in lines:
-                # print(line, end='')
 
     def print_map(self):
-        """
-        Prints the castle map.
-
-
-        """
-        # arr[0][0] = 1
+        """Prints the castle map."""
         for row in self._map_array:
             for element in row:
                 print(element, end=" ")
             print()
 
-    def update_map(self, row, column):
+    def update_map(self, location):
         """."""
         visited = 'X'
+        coordenate = location.map_position
+        index = coordenate.split(',', 2)
+        self._map_array[int(index[0])][int(index[1])] = visited
+        self.update_file()

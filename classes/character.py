@@ -3,8 +3,6 @@ from player import Player
 import string
 
 
-
-
 class Character:
     """Acts as interface."""
     def __init__(self, name, player):
