@@ -13,9 +13,9 @@ class Character:
     def welcome_player(self):
         """Welcomes the player at the beginning of the game. Describes instructions, help and allowed input."""
         print(f"Hello, {self.player.name}. My name is {self.name}\nMy father will be very, very upset to find you"
-              f" in his house.\nIf you help me find the Nintendo Flex he's taken from me, I will let you go and "
-              f"not tell him about your intrusion.\nHelp me go around the castle to find my Nintendo Flex and meet me "
-              f"at the hall once you've found it.\nIf you try to leave the house before I have my Nintedo Flex,"
+              f" in his house.\nIf you help me find the Gameboy he's taken from me, I will let you go and "
+              f"not tell him about your intrusion.\nHelp me go around the castle to find my Gameboy and meet me "
+              f"at the hall once you've found it.\nIf you try to leave the house before I have my Gameboy,"
               f" you won't be able to escape my father's teeth...\n")
 
     @staticmethod
@@ -117,3 +117,8 @@ class Character:
 
     def display_winning_message(self):
         print("You have won!")
+        return
+
+    def display_losing_message(self):
+        print("You have lost!")
+        return

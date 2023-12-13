@@ -10,12 +10,12 @@ def play():
 
     while True:
         # Instantiate items (5).
-        book = Item('book', 'That book seems interesting', 'You have picked up a book')
-        key = Item('key', 'That key seems interesting', 'You have picked up a key')
-        lamp = Item('lamp', 'That lamp seems interesting', 'You have picked up a lamp')
-        flower = Item('flower', 'That flower seems interesting', 'You have picked up a flower')
-        nintendo_flex = Item('Nintendo Flex', 'That nintendo flex seems interesting', 'You have picked up a Nintendo Flex')
-        items = [book, key, lamp, flower, nintendo_flex]
+        book = Item('book', 'That book seems interesting.', 'You have picked up a book.')
+        key = Item('key', 'That key seems interesting.', 'You have picked up a key.')
+        lamp = Item('lamp', 'That lamp seems interesting.', 'You have picked up a lamp.')
+        flower = Item('flower', 'That flower seems interesting.', 'You have picked up a flower.')
+        gameboy = Item('gameboy', 'That gameboy seems interesting.', 'You have picked up a Gameboy.')
+        items = [book, key, lamp, flower, gameboy]
 
         # Instantiate locations (7).
         hall = Location("hall", True, False, True, False, "You have reached the hall.",
@@ -33,7 +33,7 @@ def play():
                                   map_position="0,0", east_leads_to='guest bedroom', description="You have reached the "
                                   "master bedroom.", item=key)
         bathroom = Location("bathroom", False, False, False, True, "You have reached the bathroom.",
-                            map_position="2,0", east_leads_to='hall', item=nintendo_flex)
+                            map_position="2,0", east_leads_to='hall', item=gameboy)
         locations = [garden, cemetery, hall, lounge, guest_bedroom, master_bedroom, bathroom]
 
         # Initiate player, character, and map.
@@ -72,42 +72,52 @@ def play():
             if checked_response is False:
                 # Bad input
                 dracula_jr.wrong_input()
+                continue
 
-            elif checked_response == 'is location':
-                # Response is a direction: N, S, W, E
-                new_room = dracula_jr.get_next_room(response)
-                for location in locations:
-                    # Matches input to Location
-                    if new_room == location.name:
-                        new_room = location
-                        player.set_location(new_room)
+            elif checked_response is not False:
+                if checked_response == 'is location':
+                    # Response is a direction: N, S, W, E
+                    new_room = dracula_jr.get_next_room(response)
+                    for location in locations:
+                        # Matches input to Location
+                        if new_room == location.name:
+                            new_room = location
+                            player.set_location(new_room)
 
-            elif checked_response == 'is command':
-                # Response is a command
-                no_match = -1
-                result = dracula_jr.inspect_item(player.get_location(), response)
-                if result is True:  # Command matches the item in location
-                    if player.backpack.in_backpack(player.location.item.name) == no_match:
-                        new_item = player.backpack.add(player.location.item.name)
-                        for item in items:
-                            if new_item == item.name:
-                                new_item = item
-                                print(new_item.message_picked_up)
-                                player.backpack.show_inventory()
-                elif result is False:   # Command does not match the item in location
-                    dracula_jr.wrong_command()
+                    if player.location.name == hall.name:
+                        if player.backpack.in_backpack(gameboy.name) != -1:
+                            # Player wins: has the Gameboy and has reached the hall
+                            dracula_jr.display_winning_message()
+                            break
 
-            if player.backpack.in_backpack(key.name) != -1 and player.location.name == hall.name:
-                # Player wins: has the key and has reached the hall
-                dracula_jr.display_winning_message()
-                play_again = input('\nWould you like to play again?')
-                if play_again == 'yes' or play_again == 'y' or play_again == 'YES' or play_again == 'Y':
-                    print('OK, here we go again.\n')
-                    break
-                else:
-                    print(f'No worries, {player.name}. See you next time.')
-                    time.sleep(3)
-                    quit()
+                elif checked_response == 'is command':
+                    # Response is a command
+                    if player.backpack.in_backpack(key.name) != -1 and player.location.name == hall.name:
+                        # Player loses: tried to use key to open hall door
+                        dracula_jr.display_losing_message()
+                        break
+                    else:
+                        no_match = -1
+                        result = dracula_jr.inspect_item(player.get_location(), response)
+                        if result is True:  # Command matches the item in location
+                            if player.backpack.in_backpack(player.location.item.name) == no_match:
+                                new_item = player.backpack.add(player.location.item.name)
+                                for item in items:
+                                    if new_item == item.name:
+                                        new_item = item
+                                        print(new_item.message_picked_up)
+                                        player.backpack.show_inventory()
+                        elif result is False:   # Command does not match the item in location
+                            dracula_jr.wrong_command()
+
+        play_again = input('\nWould you like to play again?')
+        if play_again == 'yes' or play_again == 'y' or play_again == 'YES' or play_again == 'Y':
+            print('OK, here we go again.\n')
+            continue
+        else:
+            print(f'No worries, {player.name}. See you next time.')
+            time.sleep(3)
+            quit()
 
 
 if __name__ == "__main__":
