@@ -1,6 +1,3 @@
-from location import Location
-from player import Player
-from classes.item import Item
 import string
 
 
@@ -116,9 +113,9 @@ class Character:
               f"To check the items in your backpack, enter 'I'.\nFor help, enter 'H'.\n")
 
     def display_winning_message(self):
-        print("You have won!")
+        print("You found my gameboy, thanks.\nYou have won!")
         return
 
     def display_losing_message(self):
-        print("You have lost!")
+        print("You used the key, but didn't bring my gameboy.\n You have lost!")
         return

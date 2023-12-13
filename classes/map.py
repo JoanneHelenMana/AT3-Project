@@ -3,7 +3,7 @@ import os
 
 class Map:
     """
-    A 3x3 map.
+    A 3x3 map of the castle's rooms.
 
     '_' = not visited
     'X' = visited

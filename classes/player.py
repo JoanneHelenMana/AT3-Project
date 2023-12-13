@@ -36,6 +36,8 @@ class Player:
         print(self.location.get_description())
         if self.location.item is not None and self.backpack.in_backpack(self.location.item.name) == -1:
             print(self.location.item.message_in_location)
+
+        # self.map.print_map()      if uncommented, it will print and update the map as the player moves around
         return self.location
 
     def set_initial_location(self, location):
