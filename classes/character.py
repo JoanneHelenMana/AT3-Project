@@ -17,8 +17,6 @@ class Character:
               f"not tell him about your intrusion.\nHelp me go around the castle to find my Nintendo Flex and meet me "
               f"at the hall once you've found it.\nIf you try to leave the house before I have my Nintedo Flex,"
               f" you won't be able to escape my father's teeth...\n")
-        print(f"")
-
 
     @staticmethod
     def get_player_response(exits):
@@ -110,4 +108,12 @@ class Character:
 
     def display_help(self):
         """Prints help message to console."""
-        print('Help')
+        print(f"\nHelp:\nYour goal is to find Dracula Jr.'s Nintendo Flex, reach the hall and return it to him."
+              f"You might be tempted to reach the hall and leave the castle, however, you'll lose the game that way"
+              f"and will face the fatal Dracula's bite.\n\nTo navigate the rooms in the castle, use the available exits"
+              f":\nN = north\nS = south\nW = west\nE = east\n\nYou can pick up items along your way using a two-word "
+              f"command. If the item presented is a pen, enter 'take pen'. This will add the item to your backpack.\n"
+              f"To check the items in your backpack, enter 'I'.\nFor help, enter 'H'.\n")
+
+    def display_winning_message(self):
+        print("You have won!")

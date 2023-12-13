@@ -72,7 +72,6 @@ def play():
             if checked_response is False:
                 # Bad input
                 dracula_jr.wrong_input()
-                continue
 
             elif checked_response == 'is location':
                 # Response is a direction: N, S, W, E
@@ -97,17 +96,18 @@ def play():
                                 player.backpack.show_inventory()
                 elif result is False:   # Command does not match the item in location
                     dracula_jr.wrong_command()
-                    continue
 
-        # win or lose game
-        play_again = input('Would you like to play again?')
-        if play_again == 'yes':
-            print('OK, here we go again.')
-            continue
-        else:
-            print(f'No worries, {player.name}. See you next time.')
-            time.sleep(3)
-            quit()
+            if player.backpack.in_backpack(key.name) != -1 and player.location.name == hall.name:
+                # Player wins: has the key and has reached the hall
+                dracula_jr.display_winning_message()
+                play_again = input('\nWould you like to play again?')
+                if play_again == 'yes' or play_again == 'y' or play_again == 'YES' or play_again == 'Y':
+                    print('OK, here we go again.\n')
+                    break
+                else:
+                    print(f'No worries, {player.name}. See you next time.')
+                    time.sleep(3)
+                    quit()
 
 
 if __name__ == "__main__":
