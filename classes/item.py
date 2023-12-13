@@ -1,6 +1,3 @@
-from character import Character
-
-
 class Item:
     def __init__(self, name, message_in_location, message_picked_up):
         self.name = name

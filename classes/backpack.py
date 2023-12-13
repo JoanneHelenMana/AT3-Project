@@ -1,15 +1,5 @@
 class Backpack:
-    """
-    Backpack Class
-    ToDo: [X] Instantiate backpack
-    ToDo: [X] Add Item
-    ToDo: [ ] Remove Item
-    ToDo: [ ] List Items
-    ToDo: [X] Count items
-    ToDo: [ ] in backpack (Search for Item - Student to do)
-    ToDo: [X] Sort Items
-    """
-
+    """The player's backpack contains all items the player picks up on their way around the castle."""
     def __init__(self):
         self._backpack = []
         items = []
@@ -32,7 +22,7 @@ class Backpack:
         self._backpack.sort()
 
     def count(self):
-        """."""
+        """Counts all items in the backpack."""
         return self._backpack.count(self)
 
     def show_inventory(self):
@@ -48,11 +38,31 @@ class Backpack:
         if item is not None:
             self._backpack.append(item)
             self.sort()
+            return item
 
     def in_backpack(self, item):
-        """Complete this method using a binary search
-        returns -1 or False if not found
-        returns position if found
-        :param item:
-        :return: -1 | False | integer"""
-        return None
+        """
+        Searches whether an item is already in the backpack.
+        It returns -1 if not found, and returns position if found.
+
+        :param item: item
+        :return: -1 | integer
+        """
+        low = 0
+        high = len(self._backpack) - 1
+        mid = 0
+
+        while low <= high:
+            self.sort()
+            mid = (high + low) // 2
+
+            if self._backpack[mid] < item:
+                low = mid + 1
+
+            elif self._backpack[mid] > item:
+                high = mid - 1
+
+            else:
+                return mid  # Item present at position 'mid'
+
+        return -1   # Item not in backpack

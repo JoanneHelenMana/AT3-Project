@@ -1,10 +1,9 @@
 from classes.backpack import Backpack
-from classes.location import Location
 from classes.map import Map
 
 
 class Player:
-    """."""
+    """The player of the game. It is mainly used to move the player around the castle's rooms."""
     def __init__(self, location, name=None, backpack=None):
         self.location = location
         self.set_initial_location(self.location)
@@ -19,7 +18,7 @@ class Player:
     @staticmethod
     def set_name():
         """Sets the player's name."""
-        name = input(f"What's your name, player?\n")
+        name = input(f"What's your name, stranger?\n")
         return name
 
     @staticmethod
@@ -35,11 +34,12 @@ class Player:
             self.location.visited = True
             self.map.update_map(location)
         print(self.location.get_description())
-        if self.location.item is not None:
+        if self.location.item is not None and self.backpack.in_backpack(self.location.item.name) == -1:
             print(self.location.item.message_in_location)
         return self.location
 
     def set_initial_location(self, location):
+        """Sets the initial location of the player."""
         self.location = location
 
     def get_location(self):

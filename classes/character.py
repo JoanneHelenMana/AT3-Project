@@ -1,20 +1,24 @@
 from location import Location
 from player import Player
+from classes.item import Item
 import string
 
 
 class Character:
-    """Acts as interface."""
+    """The game's character's other than the player. This class acts as the interface of the game."""
     def __init__(self, name, player):
         self.name = name
         self.player = player
 
     def welcome_player(self):
         """Welcomes the player at the beginning of the game. Describes instructions, help and allowed input."""
-        print(f"Welcome, {self.player.name}")
-        # expand welcome message
-        # I for inventory
-        # thorough instruction
+        print(f"Hello, {self.player.name}. My name is {self.name}\nMy father will be very, very upset to find you"
+              f" in his house.\nIf you help me find the Nintendo Flex he's taken from me, I will let you go and "
+              f"not tell him about your intrusion.\nHelp me go around the castle to find my Nintendo Flex and meet me "
+              f"at the hall once you've found it.\nIf you try to leave the house before I have my Nintedo Flex,"
+              f" you won't be able to escape my father's teeth...\n")
+        print(f"")
+
 
     @staticmethod
     def get_player_response(exits):
@@ -42,7 +46,7 @@ class Character:
         response = response.strip()
 
         if len(response) == 1:
-            # Response is a direction(exit)
+            # Response is a direction (exit)
             if response.upper() == 'N':
                 location = self.player.location.get_north_leads_to()
 
@@ -63,6 +67,7 @@ class Character:
                 return False
 
             elif self.check_letters(response) is True:
+                # Response is a command
                 return 'is command'
 
     def get_next_room(self, response):
@@ -81,9 +86,28 @@ class Character:
 
         return location
 
-    def inspect_item(self):
+    def inspect_item(self, location, response):
         """."""
-        print('item inspected')
+        words = response.split()
+        if len(words) == 2:
+            # Checks a two-word command for coincidence with item in location
+            for word in words:
+                if word == location.item.name:
+                    return True    # Coincidence with item
+            return False     # No coincidence with item
+
+        elif len(words) != 2:
+            # Command too long
+            return False
 
     def wrong_input(self):
+        """Prints a wrong input message to console."""
         print(f'Wrong input. Try again, {self.player.name}')
+
+    def wrong_command(self):
+        """Prints a wrong command message to console."""
+        print(f'Wrong command. Try again.')
+
+    def display_help(self):
+        """Prints help message to console."""
+        print('Help')
